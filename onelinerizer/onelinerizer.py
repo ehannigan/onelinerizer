@@ -533,11 +533,11 @@ class Namespace(ast.NodeVisitor):
         args = list(zip(padded_defaults, tree.args))
         args = [a.arg if d is None else a.arg + "=" + self.visit(d) for (d, a) in args]
         if tree.vararg is not None:
-            args += ["*" + tree.vararg]
-            arg_names += [tree.vararg]
+            args += ["*" + tree.vararg.arg]
+            arg_names += [tree.vararg.arg]
         if tree.kwarg is not None:
-            args += ["**" + tree.kwarg]
-            arg_names += [tree.kwarg]
+            args += ["**" + tree.kwarg.arg]
+            arg_names += [tree.kwarg.arg]
         args = T(', ').join(args)
         return (T('lambda {}: ').format(args), arg_names)
 
@@ -810,12 +810,15 @@ def onelinerize(original):
 
     original = original.strip()
 
+    # removed ast.Print, no longer there for python 3, don't know if I need to replace it with something
+    # https://greentreesnakes.readthedocs.io/en/latest/nodes.html?highlight=starargs#Print
+    # also, ast.Exec does not exist?
     # If there's only one line anyways, be lazy
     if len(original.splitlines()) == 1 and \
        len(t.body) == 1 and \
-       type(t.body[0]) in (ast.Delete, ast.Assign, ast.AugAssign, ast.Print,
+       type(t.body[0]) in (ast.Delete, ast.Assign, ast.AugAssign,
                            ast.Raise, ast.Assert, ast.Import, ast.ImportFrom,
-                           ast.Exec, ast.Global, ast.Expr, ast.Pass):
+                           ast.Global, ast.Expr, ast.Pass):
         return original
 
     return get_init_code(t, table)
