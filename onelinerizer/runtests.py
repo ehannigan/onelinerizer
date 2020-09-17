@@ -2,7 +2,7 @@ import unittest
 import os
 import random
 import sys
-from io import StringIO
+from io import StringIO, BytesIO
 
 from .onelinerizer import onelinerize
 
@@ -23,9 +23,7 @@ def make_test(filename):
             self.longMessage = True
             original = fi.read().strip()
             onelinerized = onelinerize(original)
-            self.assertEqual(capture_exec(original),
-                             capture_exec(onelinerized),
-                             msg="\n\nOnelined: " + onelinerized)
+            self.assertEqual(capture_exec(original), capture_exec(onelinerized), msg="\n\nOnelined: " + onelinerized)
     return new_test
 
 class FakeStdin(object):
@@ -39,7 +37,7 @@ class FakeStdin(object):
 def capture_exec(code_string):
     """Run the code with FakeStdin as stdin, return its stdout."""
     random.seed(4)  # for RFC 1149.5 compliance
-    new_stdout = StringIO()
+    new_stdout = BytesIO()
     old_stdout = sys.stdout
     old_stdin = sys.stdin
     sys.stdout = new_stdout
@@ -52,7 +50,7 @@ def capture_exec(code_string):
         exc = traceback.format_exc()
         if DEBUG:
             old_stdout.write("\nFYI: test threw error %s\n" % str(type(e)(code_string + ', ' + exc)))
-        new_stdout.write("Error thrown.")
+        new_stdout.write(b"Error thrown.")
     sys.stdout = old_stdout
     sys.stdin = old_stdin
     return new_stdout.getvalue()

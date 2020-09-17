@@ -74,7 +74,7 @@ def get_init_code(tree, table):
 
     output = provide(
         output.format(__l=T('{__g}')),
-        __print=T("__import__('__builtin__', level=0).__dict__['print']"),
+        __print=T("__import__('builtins', level=0).__dict__['print']"),
         __y="(lambda f: (lambda x: x(x))(lambda y:"
           " f(lambda: y(y)())))",
         __g=T("globals()"),
@@ -328,17 +328,34 @@ class Namespace(ast.NodeVisitor):
         return T('{__break}()')
 
     def visit_Call(self, tree):
+        # TODO: understand this
+        # https://greentreesnakes.readthedocs.io/en/latest/nodes.html?highlight=starargs#Call
+        # https://github.com/PyCQA/bandit/commit/1b11246e595675abad1669ce7f64f4a17caf9e8f
         func = self.visit(tree.func)
-        args = [self.visit(arg) for arg in tree.args]
-        keywords = [self.visit(kw) for kw in tree.keywords]
-        if tree.starargs is None:
-            starargs = []
-        else:
-            starargs = ["*" + self.visit(tree.starargs)]
-        if tree.kwargs is None:
-            kwargs = []
-        else:
-            kwargs = ["**" + self.visit(tree.kwargs)]
+        args = []
+        keywords = []
+        starargs = []
+        kwargs = []
+        for arg in tree.args:
+            if isinstance(arg, ast.Starred):
+                starargs.extend(["*" + self.visit(arg.value)])
+            else:
+                args.extend([self.visit(arg)])
+        for keyword in tree.keywords:
+            if keyword.arg is None:
+                kwargs.extend(["**" + self.visit(keyword)])
+            else:
+                keywords.extend([self.visit(keyword)])
+        # args = [self.visit(arg) for arg in tree.args]
+        # keywords = [self.visit(kw) for kw in tree.keywords]
+        # if tree.args is None:
+        #     starargs = []
+        # else:
+        #     starargs = ["*" + self.visit(tree.starargs)]
+        # if tree.kwargs is None:
+        #     kwargs = []
+        # else:
+        #     kwargs = ["**" + self.visit(tree.kwargs)]
         elems = args + keywords + starargs + kwargs
         comma_sep_elems = T(', ').join(elems)
         return T('{}({})').format(func, comma_sep_elems)
@@ -511,6 +528,14 @@ class Namespace(ast.NodeVisitor):
         # ('lambda x, y, z=5, *args: ', ['x', 'y', 'z', 'args'])
         padded_defaults = [None] * (len(tree.args) -
                                     len(tree.defaults)) + tree.defaults
+        for arg in tree.args:
+            print('arg: {} \n'.format(arg))
+        if tree.vararg is not None:
+            for varg in tree.vararg:
+                print('vararg: {} \n'.format(varg))
+        if tree.kwarg is not None:
+            for kw in tree.kwarg:
+                print('kwarg: {}\n'.format(kw))
         arg_names = [arg.id for arg in tree.args]
         args = list(zip(padded_defaults, tree.args))
         args = [a.id if d is None else a.id + "=" + self.visit(d) for (d, a) in args]
