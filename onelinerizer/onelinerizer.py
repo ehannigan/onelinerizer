@@ -524,21 +524,14 @@ class Namespace(ast.NodeVisitor):
                     function_code, tree.name, doc))
 
     def visit_arguments(self, tree):
+        # https://greentreesnakes.readthedocs.io/en/latest/nodes.html?highlight=starargs#arg
         # this should return something of the form
         # ('lambda x, y, z=5, *args: ', ['x', 'y', 'z', 'args'])
         padded_defaults = [None] * (len(tree.args) -
                                     len(tree.defaults)) + tree.defaults
-        for arg in tree.args:
-            print('arg: {} \n'.format(arg))
-        if tree.vararg is not None:
-            for varg in tree.vararg:
-                print('vararg: {} \n'.format(varg))
-        if tree.kwarg is not None:
-            for kw in tree.kwarg:
-                print('kwarg: {}\n'.format(kw))
-        arg_names = [arg.id for arg in tree.args]
+        arg_names = [arg.arg for arg in tree.args]
         args = list(zip(padded_defaults, tree.args))
-        args = [a.id if d is None else a.id + "=" + self.visit(d) for (d, a) in args]
+        args = [a.arg if d is None else a.arg + "=" + self.visit(d) for (d, a) in args]
         if tree.vararg is not None:
             args += ["*" + tree.vararg]
             arg_names += [tree.vararg]
