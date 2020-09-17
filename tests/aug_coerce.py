@@ -3,4 +3,4 @@ class C:
         return 2, 2
 o = C()
 o += C()
-print o
+print(o)

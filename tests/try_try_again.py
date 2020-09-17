@@ -7,4 +7,4 @@ def f():
     except AssertionError:
         pass
 
-print 'f: ' + f()
+print('f: ' + f())

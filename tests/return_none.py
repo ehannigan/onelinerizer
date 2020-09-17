@@ -1,8 +1,8 @@
 def f():
-    print 1
+    print(1)
     return
-    print 2
+    print(2)
 
-print 3
-print f()
-print 4
+print(3)
+print(f())
+print(4)

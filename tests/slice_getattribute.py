@@ -1,16 +1,14 @@
 class M(type):
     __getattribute__ = None
 
-class G(object):
-    __metaclass__ = M
+class G(object, metaclass=M):
     __getattribute__ = None
     def __get__(self, instance, owner):
         def f(*args):
-            print args
+            print(args)
         return f
 
-class C(object):
-    __metaclass__ = M
+class C(object, metaclass=M):
     __getattribute__ = None
     __getitem__ = G()
     __setitem__ = G()

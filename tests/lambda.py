@@ -1,2 +1,2 @@
 f = lambda x: x * 4
-print f(f(8))
+print(f(f(8)))

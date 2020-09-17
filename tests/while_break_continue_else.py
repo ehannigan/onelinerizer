@@ -17,4 +17,4 @@ while True:
     out += 'd'
 else:
     out += 'e'
-print out
+print(out)

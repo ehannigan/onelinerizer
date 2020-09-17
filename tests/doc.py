@@ -24,7 +24,7 @@ def aenean_interdum(f):
     imperdiet eu quam faucibus faucibus.
     """
 
-    print f.__doc__
+    print(f.__doc__)
     f.__doc__ += '\nNullam id feugiat orci, nec bibendum lacus.\n'
     return f
 
@@ -43,7 +43,7 @@ def donec_porttitor(whats_up):
     dictum maximus lacus, eu rutrum massa.
     """
 
-    print whats_up.__doc__
+    print(whats_up.__doc__)
     return whats_up
 
 @donec_porttitor
@@ -67,7 +67,7 @@ class vestibulum_ante(object):
 
     pass
 
-print __doc__
-print aenean_interdum.__doc__
-print donec_porttitor.__doc__
-print vestibulum_ante.__doc__
+print(__doc__)
+print(aenean_interdum.__doc__)
+print(donec_porttitor.__doc__)
+print(vestibulum_ante.__doc__)

@@ -36,7 +36,7 @@ def main():
         infile.close()
     onelinerized = onelinerize(original)
     if outfilename is None:
-        print onelinerized
+        print(onelinerized)
     else:
         outfi = open(outfilename, 'w')
         outfi.write(onelinerized + '\n')
@@ -46,17 +46,17 @@ def main():
         if outfilename is None:
             # redirect to sys.stderr if I'm writing outfile to sys.stdout
             sys.stdout = sys.stderr
-        print '--- ORIGINAL ---------------------------------'
-        print original
-        print '----------------------------------------------'
+        print('--- ORIGINAL ---------------------------------')
+        print(original)
+        print('----------------------------------------------')
         scope = {}
         try:
             exec(original, scope)
         except Exception as e:
             traceback.print_exc(e)
-        print '--- ONELINERIZED -----------------------------'
-        print onelinerized
-        print '----------------------------------------------'
+        print('--- ONELINERIZED -----------------------------')
+        print(onelinerized)
+        print('----------------------------------------------')
         scope = {}
         try:
             exec(onelinerized, scope)

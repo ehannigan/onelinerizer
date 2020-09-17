@@ -3,9 +3,9 @@ if True:
     x = 2
 else:
     x = 3
-print x
+print(x)
 if False:
     x = 4
 else:
     x = 5
-print x
+print(x)

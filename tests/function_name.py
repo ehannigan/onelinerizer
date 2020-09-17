@@ -1,3 +1,3 @@
 def foo():
     pass
-print foo.__name__
+print(foo.__name__)

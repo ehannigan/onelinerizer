@@ -4,4 +4,4 @@ try:
     except Exception:
         raise
 except Exception as e:
-    print repr(e)
+    print(repr(e))

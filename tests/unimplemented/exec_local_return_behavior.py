@@ -1,5 +1,5 @@
 def f():
-    exec ""
+    exec("")
     locals()['a'] = 6
     return a
 
@@ -8,7 +8,7 @@ def g():
     return a
 
 a = 5
-print f()
+print(f())
 
 a = 5
-print g()
+print(g())

@@ -1,13 +1,13 @@
 out = ''
 for i in [1,2,3,4]:
-    print i
+    print(i)
     out += 'a'
     for j in [5,6,7,8]:
-        print j
+        print(j)
         out += 'b'
         continue
     else:
-        print j
+        print(j)
         out += 'c'
         if i == 2:
             continue
@@ -16,4 +16,4 @@ for i in [1,2,3,4]:
     out += 'd'
 else:
     out += 'e'
-print i, out
+print(i, out)

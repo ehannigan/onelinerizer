@@ -1,4 +1,4 @@
 def f(x):
     class c:
-        print x
+        print(x)
 f(3)

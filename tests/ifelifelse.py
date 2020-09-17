@@ -5,4 +5,4 @@ elif True:
     x = 6
 else:
     x = 7
-print x
+print(x)

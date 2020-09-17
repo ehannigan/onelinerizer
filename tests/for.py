@@ -1,7 +1,7 @@
 x = 5
 for i in range(5):
     x = x + i
-print x
+print(x)
 
 # inner loop takes in d, returns a modified d?
 # list: a list of i

@@ -33,10 +33,10 @@ def only_for_parsing():
     (lambda: aug_assign_target2)[lambda: aug_assign_lower2:lambda: slice_upper2] += lambda: aug_assign_value2
     (lambda: aug_assign_target3)[lambda: aug_assign_lower3:lambda: slice_upper3:lambda: slice_upper3] += lambda: aug_assign_value3
 
-    print lambda: print_arg0, lambda: print_arg1,
-    print lambda: print_arg2, lambda: print_arg3
-    print >>lambda: print_file0, lambda: print_arg4, lambda: print_arg5,
-    print >>lambda: print_file1, lambda: print_arg6, lambda: print_arg7
+    print(lambda: print_arg0, lambda: print_arg1, end=' ')
+    print(lambda: print_arg2, lambda: print_arg3)
+    print(lambda: print_arg4, lambda: print_arg5, end=' ', file=lambda: print_file0)
+    print(lambda: print_arg6, lambda: print_arg7, file=lambda: print_file1)
 
     for (lambda: for_target).attr in lambda: for_iter:
         lambda: for_body
@@ -57,13 +57,15 @@ def only_for_parsing():
 
     # TODO: with
 
-    raise lambda: raise_type, lambda: raise_inst, lambda: raise_tback
+    raise lambda: raise_type(lambda: raise_inst).with_traceback(lambda: raise_tback)
 
     try:
         lambda: body
-    except lambda: handler_type0 as (lambda: handler_name0).attr:
+    except lambda: handler_type0 as xxx_todo_changeme:
+        (lambda: handler_name0).attr = xxx_todo_changeme
         lambda: handler_body0
-    except lambda: handler_type1 as (lambda: handler_name1).attr:
+    except lambda: handler_type1 as xxx_todo_changeme1:
+        (lambda: handler_name1).attr = xxx_todo_changeme1
         lambda: handler_body1
     else:
         lambda: orelse_body
@@ -78,7 +80,7 @@ def only_for_parsing():
     import import_name0, import_name1 as import_asname1
     from import_from_module import import_from_name0, import_from_name1 as import_from_asname1
 
-    exec (lambda: exec_body) in lambda: exec_globals, lambda: exec_locals
+    exec((lambda: exec_body), lambda: exec_globals, lambda: exec_locals)
 
     global global_name
 
@@ -130,7 +132,7 @@ def only_for_parsing():
         *lambda: lambda_args,
         **lambda: lambda_kwargs)
 
-    `lambda: repr_value`
+    repr(lambda: repr_value)
     17
     "string"
 

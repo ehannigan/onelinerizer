@@ -1,19 +1,19 @@
 import sys
-import StringIO
+import io
 
-print
-print 1,
-print 2
+print()
+print(1, end=' ')
+print(2)
 
-s = StringIO.StringIO()
-print >>s, 3,
-print >>s, 4
-print repr(s.getvalue())
+s = io.StringIO()
+print(3, end=' ', file=s)
+print(4, file=s)
+print(repr(s.getvalue()))
 
 def f():
-    print 'f'
+    print('f')
     return sys.stdout
 def g():
-    print 'g'
+    print('g')
     return 'hello'
-print >>f(), g()
+print(g(), file=f())

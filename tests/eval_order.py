@@ -1,7 +1,7 @@
 import sys
 
 def trace(msg, value):
-    print msg
+    print(msg)
     return value
 
 @trace('function decorator 0', lambda f: f)
@@ -39,7 +39,7 @@ trace('aug assign target 1', l)[trace('aug assign index', 0)] += trace('aug assi
 trace('aug assign target 2', l)[trace('aug assign lower 2', 0):trace('aug assign upper 2', 0)] += trace('aug assign value 2', [])
 trace('aug assign target 3', l)[trace('aug assign lower 3', 0):trace('aug assign upper 3', 0):trace('aug assign step 3', 1)] += trace('aug assign value 2', [])
 
-print >>trace('print file', sys.stdout), trace('print arg', 0)
+print(trace('print arg', 0), file=trace('print file', sys.stdout))
 
 for trace('for target', o).attr in trace('for iter', [0]):
     trace('for body', None)
@@ -67,9 +67,9 @@ for b in [True, False]:
 
 assert trace('assert test', True), trace('assert message', '')
 
-exec trace('exec body', '')
-exec trace('exec body', '') in trace('exec globals', {})
-exec trace('exec body', '') in trace('exec globals', {}), trace('exec locals', {})
+exec(trace('exec body', ''))
+exec(trace('exec body', ''), trace('exec globals', {}))
+exec(trace('exec body', ''), trace('exec globals', {}), trace('exec locals', {}))
 
 trace('bool op left', True) or trace('bool op right', True)
 trace('bin op left', 0) + trace('bin op right', 0)
@@ -118,7 +118,7 @@ trace('lambda func', lam)(
     *trace('lambda args', []),
     **trace('lambda kwargs', {}))
 
-`trace('repr value', 0)`
+repr(trace('repr value', 0))
 
 trace('attribute value', o).attr
 trace('slice2 value', l)[trace('slice2 lower', 0):trace('slice2 upper', 0)]

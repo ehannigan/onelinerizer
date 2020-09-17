@@ -14,4 +14,4 @@ stocks = csv.reader(open('stocks.csv', 'rb'))
 status_labels = {-1: 'down', 0: 'unchanged', 1: 'up'}
 for ticker, name, price, change, pct in stocks:
     status = status_labels[cmp(float(change), 0.0)]
-    print '%s is %s (%s%%)' % (name, status, pct)
+    print('%s is %s (%s%%)' % (name, status, pct))

@@ -25,9 +25,9 @@ def lambda_function(arguments_to_values):
         T - e.g. (lambda a: {})(47)
     """
     return T('(lambda {}: {})({})').format(
-        T(', ').join(arguments_to_values.keys()),
+        T(', ').join(list(arguments_to_values.keys())),
         T('{}'),
-        T(', ').join(arguments_to_values.values()))
+        T(', ').join(list(arguments_to_values.values())))
 
 def provide(body, **subs):
     """
@@ -383,7 +383,7 @@ class Namespace(ast.NodeVisitor):
             wrap(ns, T(' ').join(
                 [T('for {} in {__iter}').format(ns.visit(generators[0].target))] +
                 ['if ' + ns.visit(i) for i in generators[0].ifs] +
-                map(ns.visit, generators[1:]))),
+                list(map(ns.visit, generators[1:])))),
             __iter=iter0)
 
     def visit_Continue(self, tree):
@@ -399,7 +399,7 @@ class Namespace(ast.NodeVisitor):
     def visit_Dict(self, tree):
         return T('{{{}}}').format(T(', ').join(
             T('{}: {}').format(k, v)
-            for k, v in zip(map(self.visit, tree.keys), map(self.visit, tree.values))))
+            for k, v in zip(list(map(self.visit, tree.keys)), list(map(self.visit, tree.values)))))
 
     def visit_DictComp(self, tree):
         return self.comprehension_code(
@@ -512,7 +512,7 @@ class Namespace(ast.NodeVisitor):
         padded_defaults = [None] * (len(tree.args) -
                                     len(tree.defaults)) + tree.defaults
         arg_names = [arg.id for arg in tree.args]
-        args = zip(padded_defaults, tree.args)
+        args = list(zip(padded_defaults, tree.args))
         args = [a.id if d is None else a.id + "=" + self.visit(d) for (d, a) in args]
         if tree.vararg is not None:
             args += ["*" + tree.vararg]
@@ -620,7 +620,7 @@ class Namespace(ast.NodeVisitor):
 
     def visit_ListComp(self, tree):
         return T('[{}]').format(T(' ').join([self.visit(tree.elt)] +
-                                            map(self.visit, tree.generators)))
+                                            list(map(self.visit, tree.generators))))
 
     def visit_Name(self, tree):
         if isinstance(tree.ctx, (ast.Store, ast.AugStore)):

@@ -11,4 +11,4 @@ def median(pool):
     else:
         return (copy[size/2 - 1] + copy[size/2]) / 2
 
-print median([2, 9, 9, 7, 9, 2, 4, 5, 8])
+print(median([2, 9, 9, 7, 9, 2, 4, 5, 8]))

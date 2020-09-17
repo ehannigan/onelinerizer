@@ -2,7 +2,7 @@ import types
 
 def trace(name):
     def f(self, *args):
-        print name, repr(args)
+        print(name, repr(args))
         return 0
     return f
 
@@ -100,7 +100,7 @@ def delete(a, s):
 
 def g(e):
     def __getattr__(self, name):
-        print '__getattr__', repr(name)
+        print('__getattr__', repr(name))
         if name == '__len__':
             return lambda: 100
         if name in e:
@@ -113,8 +113,8 @@ for ns in [['__%sitem__'], ['__%sitem__', '__%sslice__']]:
     for meta, d in [
             (type, e),
             (type, dict(e, __len__=lambda self: 100)),
-            (types.ClassType, dict(e, __len__=lambda self: 100)),
-            (types.ClassType, g(e))]:
+            (type, dict(e, __len__=lambda self: 100)),
+            (type, g(e))]:
         a = meta('dummy', (), d)()
         for s in [1, -1]:
             get(a, s)

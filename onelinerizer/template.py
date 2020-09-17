@@ -133,7 +133,7 @@ class T(Template):
                 self.free_count[arg_used] = self.free_count.get(arg_used, 0) + 1
                 if format_spec:
                     format_spec_t = T(format_spec)
-                    for key, count in format_spec_t.free_count.items():
+                    for key, count in list(format_spec_t.free_count.items()):
                         self.free_count[key] = self.free_count.get(key, 0) + count
 
     def render_parts(self, args, kwargs, auto_arg_index):
@@ -179,23 +179,23 @@ class Format(Template):
         self.kwargs = kwargs
         self.auto_arg_index = auto_arg_index
         self.free_count = {}
-        for key, count in self.template.free_count.items():
+        for key, count in list(self.template.free_count.items()):
             if key == "":
                 for i in range(auto_arg_index, auto_arg_index + count):
                     if isinstance(args[i], Template):
-                        for key1, count1 in args[i].free_count.items():
+                        for key1, count1 in list(args[i].free_count.items()):
                             self.free_count[key1] = (
                                 self.free_count.get(key1, 0) + count1
                             )
-            elif isinstance(key, (int, long)):
+            elif isinstance(key, int):
                 if isinstance(args[key], Template):
-                    for key1, count1 in args[key].free_count.items():
+                    for key1, count1 in list(args[key].free_count.items()):
                         self.free_count[key1] = (
                             self.free_count.get(key1, 0) + count * count1
                         )
             elif key in kwargs:
                 if isinstance(kwargs[key], Template):
-                    for key1, count1 in kwargs[key].free_count.items():
+                    for key1, count1 in list(kwargs[key].free_count.items()):
                         self.free_count[key1] = (
                             self.free_count.get(key1, 0) + count * count1
                         )
@@ -217,7 +217,7 @@ class Format(Template):
                 if isinstance(arg, Template)
                 else arg,
             )
-            for key, arg in self.kwargs.items()
+            for key, arg in list(self.kwargs.items())
         )
         return [(self.template, formatted_args, formatted_kwargs, self.auto_arg_index)]
 
@@ -238,7 +238,7 @@ class Concat(Template):
         self.free_count = {}
         for t in ts:
             if isinstance(t, Template):
-                for key, count in t.free_count.items():
+                for key, count in list(t.free_count.items()):
                     self.free_count[key] = self.free_count.get(key, 0) + count
 
     def render_parts(self, args, kwargs, auto_arg_index):

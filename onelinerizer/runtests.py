@@ -2,7 +2,7 @@ import unittest
 import os
 import random
 import sys
-from StringIO import StringIO
+from io import StringIO
 
 from .onelinerizer import onelinerize
 
@@ -46,7 +46,7 @@ def capture_exec(code_string):
     sys.stdin = FakeStdin()
     namespace = {}
     try:
-        exec code_string in namespace
+        exec(code_string, namespace)
     except Exception as e:
         import traceback
         exc = traceback.format_exc()

@@ -1,41 +1,41 @@
 try:
-    print 'try 0'
+    print('try 0')
 finally:
-    print 'finally 0'
+    print('finally 0')
 
 def f():
     try:
-        print 'try f'
+        print('try f')
     finally:
-        print 'finally f'
+        print('finally f')
     return 'returned'
 
-print 'f: ' + f()
+print('f: ' + f())
 
 def g():
     try:
-        print 'try g'
+        print('try g')
         return 'returned'
     finally:
-        print 'finally g'
+        print('finally g')
 
-print 'g: ' + g()
+print('g: ' + g())
 
 def h():
     try:
-        print 'try h'
+        print('try h')
     finally:
-        print 'finally h'
+        print('finally h')
         return 'returned'
 
-print 'h: ' + h()
+print('h: ' + h())
 
 def i():
     try:
-        print 'try i'
+        print('try i')
         return 'returned'
     finally:
-        print 'finally i'
+        print('finally i')
         return 'returned harder'
 
-print 'i: ' + i()
+print('i: ' + i())

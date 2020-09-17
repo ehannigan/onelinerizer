@@ -3,4 +3,4 @@ def f():
     x = 'reassigned'
     x = 'reassigned again'
 
-print f()
+print(f())

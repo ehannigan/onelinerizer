@@ -1,4 +1,4 @@
 False = True
 while False:
-    print False
+    print(False)
     del False

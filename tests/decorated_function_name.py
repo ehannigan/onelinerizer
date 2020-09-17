@@ -1,5 +1,5 @@
 def decorator(f):
-    print f.__name__
+    print(f.__name__)
     def bar():
         return f()
     return bar
@@ -7,4 +7,4 @@ def decorator(f):
 @decorator
 def foo():
     pass
-print foo.__name__
+print(foo.__name__)

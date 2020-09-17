@@ -1,4 +1,4 @@
 try:
-    print "Hello!"
+    print("Hello!")
 except:
-    print "Something went wrong."
+    print("Something went wrong.")

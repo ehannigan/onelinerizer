@@ -1,9 +1,9 @@
 def f():
     try:
-        print 'try f'
+        print('try f')
         assert False
     finally:
-        print 'finally f'
+        print('finally f')
         return 'returned'
 
-print 'f: ' + f()
+print('f: ' + f())

@@ -1,4 +1,4 @@
 def f(x):
     return x+5
 
-print f(13)
+print(f(13))

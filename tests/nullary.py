@@ -1,5 +1,5 @@
 def f():
-    print 'hi'
+    print('hi')
 f()
 
 (lambda: None)()

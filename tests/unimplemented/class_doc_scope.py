@@ -1,4 +1,4 @@
 '''foo'''
 class C:
     '''bar'''
-    print __doc__
+    print(__doc__)

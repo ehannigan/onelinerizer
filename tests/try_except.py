@@ -1,79 +1,79 @@
 try:
-    print 'try 0'
+    print('try 0')
 except AssertionError:
-    print 'except 0'
+    print('except 0')
 else:
-    print 'else 0'
+    print('else 0')
 
 try:
-    print 'try 1'
+    print('try 1')
     assert False
 except AssertionError:
-    print 'except 1'
+    print('except 1')
 else:
-    print 'else 1'
+    print('else 1')
 
 try:
     try:
-        print 'try 2'
+        print('try 2')
         assert False
     except ZeroDivisionError:
-        print 'wrong except 2'
+        print('wrong except 2')
     else:
-        print 'else 2'
+        print('else 2')
 except AssertionError:
-    print 'right except 2'
+    print('right except 2')
 else:
-    print 'else 2'
+    print('else 2')
 
 try:
-    print 'try 3'
+    print('try 3')
     assert False
 except ZeroDivisionError:
-    print 'wrong except 3'
+    print('wrong except 3')
 except AssertionError:
-    print 'right except 3'
+    print('right except 3')
 else:
-    print 'else 3'
+    print('else 3')
 
 try:
-    print 'try 4'
+    print('try 4')
     assert False
 except:
-    print 'except 4'
+    print('except 4')
 else:
-    print 'else 4'
+    print('else 4')
 
 def f():
     try:
-        print 'try f'
+        print('try f')
         return 'returned'
     except AssertionError:
-        print 'except f'
+        print('except f')
     else:
-        print 'else f'
+        print('else f')
 
-print 'f: ' + f()
+print('f: ' + f())
 
 def g():
     try:
-        print 'try g'
+        print('try g')
         assert False
     except AssertionError:
-        print 'except g'
+        print('except g')
         return 'returned'
     else:
-        print 'else g'
+        print('else g')
 
-print 'g: ' + g()
+print('g: ' + g())
 
 def f():
     try:
-        print 'try h'
+        print('try h')
     except:
-        print 'except h'
+        print('except h')
     else:
-        print 'else h'
+        print('else h')
         return 'returned'
 
-print 'h: ' + f()
+print('h: ' + f())

@@ -15,7 +15,7 @@ try:
         raise
 
 except Exception as e:
-    print(repr(e))
+    print((repr(e)))
 
 try:
     try:
@@ -33,4 +33,4 @@ try:
         raise
 
 except Exception as e:
-    print(repr(e))
+    print((repr(e)))

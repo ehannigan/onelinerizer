@@ -4,4 +4,4 @@ def g():
         x = 'inner'
         return x
     return (h(), x)
-print g()
+print(g())

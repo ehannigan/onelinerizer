@@ -3,8 +3,8 @@ class C:
         if name == '__str__':
             return lambda: 'foo'
         raise AttributeError
-print C()
+print(C())
 
 class D(C):
     pass
-print D()
+print(D())

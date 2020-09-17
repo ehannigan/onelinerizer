@@ -3,4 +3,4 @@ def f():
     def g():
         return x
     return g
-print f()()
+print(f()())
