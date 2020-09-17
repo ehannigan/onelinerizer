@@ -12,7 +12,7 @@ $ python main.py infile.py outfile.py
 
 import ast
 import symtable
-
+import functools
 from .template import T
 
 
@@ -210,7 +210,7 @@ class Namespace(ast.NodeVisitor):
     def many_to_one(self, trees, after='None'):
         # trees :: [Tree]
         # return :: string
-        return reduce(
+        return functools.reduce(
             lambda ctx, tree: ctx.format(after=self.visit(tree)),
             trees,
             T('{after}')).format(after=after)
